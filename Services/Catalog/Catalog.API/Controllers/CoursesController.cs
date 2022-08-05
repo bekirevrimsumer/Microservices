@@ -5,7 +5,7 @@ using Shared.BaseController;
 
 namespace Catalog.API.Controllers;
 
-internal class CoursesController : BaseController
+public class CoursesController : BaseController
 {
     private readonly ICourseService _courseService;
 
@@ -29,6 +29,7 @@ internal class CoursesController : BaseController
     }
 
     [Route("api/controller/GetAllByUserId/{userId}")]
+    [HttpGet]
     public async Task<IActionResult> GetAllByUserId(string userId)
     {
         var response = await _courseService.GetAllByUserIdAsync(userId);

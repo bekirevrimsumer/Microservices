@@ -27,7 +27,7 @@ public class CourseService : ICourseService
     {
         var courses = await _courseCollection.Find(x => true).ToListAsync();
 
-        if(!courses.Any())
+        if(courses.Any())
         {
             foreach (var course in courses)
             {
@@ -49,7 +49,7 @@ public class CourseService : ICourseService
         if (course == null)
             return Response<CourseDto>.Error("Course Not Found!", 404);
 
-        course.Category = await _categoryCollection.Find<Category>(x => x.Id == course.Id).FirstAsync();
+        course.Category = await _categoryCollection.Find<Category>(x => x.Id == course.CategoryId).FirstAsync();
 
         return Response<CourseDto>.Success(_mapper.Map<CourseDto>(course), 200);
     }
@@ -57,7 +57,7 @@ public class CourseService : ICourseService
     public async Task <Response<List<CourseDto>>> GetAllByUserIdAsync(string userId)
     {
         var courses = await _courseCollection.Find<Course>(x => x.UserId == userId).ToListAsync();
-        if (!courses.Any())
+        if (courses.Any())
         {
             foreach (var course in courses)
             {
