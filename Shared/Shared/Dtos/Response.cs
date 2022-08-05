@@ -2,7 +2,7 @@
 
 namespace Shared.Dtos;
 
-public class ResponseDto<T>
+public class Response<T>
 {
     public T Data { get; private set; }
     [JsonIgnore]
@@ -10,9 +10,9 @@ public class ResponseDto<T>
     public bool IsSuccess { get; private set; }
     public List<string> Errors { get; private set; }
 
-    public static ResponseDto<T> Success(T data, int statusCode)
+    public static Response<T> Success(T data, int statusCode)
     {
-        return new ResponseDto<T>
+        return new Response<T>
         {
             Data = data,
             StatusCode = statusCode,
@@ -20,9 +20,9 @@ public class ResponseDto<T>
         };
     }
 
-    public static ResponseDto<T> Success(int statusCode)
+    public static Response<T> Success(int statusCode)
     {
-        return new ResponseDto<T>
+        return new Response<T>
         {
             Data = default(T),
             StatusCode = statusCode,
@@ -30,9 +30,9 @@ public class ResponseDto<T>
         };
     }
 
-    public static ResponseDto<T> Error(List<string> errors, int statusCode)
+    public static Response<T> Error(List<string> errors, int statusCode)
     {
-        return new ResponseDto<T>
+        return new Response<T>
         {
             Errors = errors,
             StatusCode = statusCode,
@@ -40,9 +40,9 @@ public class ResponseDto<T>
         };
     }
 
-    public static ResponseDto<T> Error(string error, int statusCode)
+    public static Response<T> Error(string error, int statusCode)
     {
-        return new ResponseDto<T>
+        return new Response<T>
         {
             Errors = new List<string>() { error },
             StatusCode = statusCode,
