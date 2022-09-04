@@ -19,6 +19,7 @@ namespace IdentityServer
                 new ApiResource("resources_basket"){Scopes={"basket_fullpermission"} },
                 new ApiResource("resources_discount"){Scopes={"discount_fullpermission"} },
                 new ApiResource("resources_order"){Scopes={"order_fullpermission"} },
+                new ApiResource("resources_payment"){Scopes={"payment_fullpermission"} },
                 new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -39,6 +40,7 @@ namespace IdentityServer
                 new ApiScope("basket_fullpermission", "BasketAPI için full erişim"),
                 new ApiScope("discount_fullpermission", "DiscountAPI için full erişim"),
                 new ApiScope("order_fullpermission", "OrderAPI için full erişim"),
+                new ApiScope("payment_fullpermission", "FakePaymentAPI için full erişim"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -63,6 +65,7 @@ namespace IdentityServer
                     AllowedScopes={ "basket_fullpermission",
                                     "discount_fullpermission",
                                     "order_fullpermission",
+                                    "payment_fullpermission",
                                     IdentityServerConstants.StandardScopes.Email, 
                                     IdentityServerConstants.StandardScopes.OpenId, 
                                     IdentityServerConstants.StandardScopes.Profile,
