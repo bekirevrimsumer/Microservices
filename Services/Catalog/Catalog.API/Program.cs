@@ -1,4 +1,5 @@
 using Catalog.API.Configurations;
+using Catalog.API.Dtos;
 using Catalog.API.Interfaces;
 using Catalog.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,6 +35,18 @@ builder.Services.AddSingleton<IDatabaseSettings>(sp =>
 {
     return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
+
+var host = Host.CreateDefaultBuilder(args).Build();
+using (var scope = host.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var categoryService = serviceProvider.GetRequiredService<ICategoryService>();
+    if (!categoryService.GetAllAsync().Result.Data.Any())
+    {
+        categoryService.CreateAsync(new CategoryDto { Name = "Asp.Net Core Kursu" }).Wait();
+    }
+}
+
 
 builder.Services.AddAutoMapper(typeof(Program));
 
